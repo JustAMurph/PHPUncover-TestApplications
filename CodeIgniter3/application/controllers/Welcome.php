@@ -21,5 +21,16 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('welcome_message');
+
+		// @finding
+		$view = $_GET['view'];
+		if ($view) {
+			include($view);
+		}
+
+		$view2 = $this->input->get('view2');
+		if ($view2) {
+			$this->load->view($view2);
+		}
 	}
 }
