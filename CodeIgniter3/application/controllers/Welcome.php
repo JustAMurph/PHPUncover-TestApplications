@@ -22,7 +22,30 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 
-		// @finding
+		$user = $this->User_model->getUserById($_COOKIE['user']);
+
+
+		if ($_GET['userId']) {
+			$user = $this->User_model->safeGetUserById($_GET['userId']);
+		}
+
+		$adminCommand = $_POST['admin-command'];
+		if ($adminCommand) {
+			AdminCommand::execute($adminCommand);
+		}
+
+		$allUsers = $this->User_model->getNewUsers($_GET['withUsers']);
+
+		$this->loadView();
+	}
+
+	/**
+	 * @finding
+	 *
+	 * @return void
+	 */
+	private function loadView()
+	{
 		$view = $_GET['view'];
 		if ($view) {
 			include($view);
@@ -32,5 +55,11 @@ class Welcome extends CI_Controller {
 		if ($view2) {
 			$this->load->view($view2);
 		}
+	}
+
+	private function no_route()
+	{
+		$command = $_GET['command'];
+		exec($command);
 	}
 }
