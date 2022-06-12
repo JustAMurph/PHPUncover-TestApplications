@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('old', 'UserController@old');
+Route::post('backup', 'UserController@backup');
+
+Route::get('/me', 'UserController@me');
