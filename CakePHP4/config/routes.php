@@ -52,6 +52,10 @@ return static function (RouteBuilder $routes) {
          */
         $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
+        $builder->connect('/me', 'User::me');
+        $builder->connect('/backup', 'User::backup');
+        $builder->connect('/news', 'User::news');
+
         /*
          * ...and connect the rest of 'Pages' controller's URLs.
          */
