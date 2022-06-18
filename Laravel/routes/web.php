@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('ci', 'CommandInjectionController@php');
 Route::get('ci-framework', 'CommandInjectionController@framework');
 
-Route::get('sqli', 'SQLInjectionConitroller@php');
-Route::get('sqli-framework', 'SQLInjectionConitroller@framework');
+Route::get('sqli', 'SQLInjectionController@php');
+Route::get('sqli-framework', 'SQLInjectionController@framework');
 
 Route::get('lfi', 'LFIController@php');
 Route::get('lfi-framework', 'LFIController@framework');
