@@ -5,7 +5,7 @@ namespace App\Application\Actions\CommandInjection;
 use App\Application\Actions\Action;
 use Psr\Http\Message\ResponseInterface;
 
-class PHPAction extends Action
+class CommandInjectionPHPAction extends Action
 {
     protected function action(): ResponseInterface
     {

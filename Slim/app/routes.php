@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use App\Application\Actions\CommandInjection\FrameworkAction as CommandInjectionFrameworkAction;
-use App\Application\Actions\LFI\FrameworkAction as LFIFrameworkAction;
-use App\Application\Actions\LFI\PHPAction as LFIPHPAction;
-use App\Application\Actions\SQLInjection\FrameworkAction as SQLIFrameworkAction;
-use App\Application\Actions\SQLInjection\PHPAction as SQLIPHPAction;
+use App\Application\Actions\CommandInjection\CommandInjectionFrameworkAction;
+use App\Application\Actions\CommandInjection\CommandInjectionPHPAction;
+use App\Application\Actions\LFI\LFIFrameworkAction;
+use App\Application\Actions\LFI\LFIPHPAction;
+use App\Application\Actions\SQLInjection\SQLInjectionFrameworkAction;
+use App\Application\Actions\SQLInjection\SQLInjectionPHPAction;
 use Slim\App;
 
-use App\Application\Actions\CommandInjection\PHPAction as CommandInjectionPHPAction;
 
 return function (App $app) {
     $app->get('ci', CommandInjectionPHPAction::class);
@@ -18,6 +18,6 @@ return function (App $app) {
     $app->get('lfi', LFIPHPAction::class);
     $app->get('lfi-framework', LFIFrameworkAction::class);
 
-    $app->get('sqli', SQLIPHPAction::class);
-    $app->get('sqli-framework', SQLIFrameworkAction::class);
+    $app->get('sqli', SQLInjectionPHPAction::class);
+    $app->get('sqli-framework', SQLInjectionFrameworkAction::class);
 };

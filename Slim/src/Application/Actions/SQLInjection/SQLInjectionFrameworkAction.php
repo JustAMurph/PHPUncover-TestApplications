@@ -6,7 +6,7 @@ use App\Application\Actions\Action;
 use mysqli;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class FrameworkAction extends Action
+class SQLInjectionFrameworkAction extends Action
 {
     protected function action(): Response
     {

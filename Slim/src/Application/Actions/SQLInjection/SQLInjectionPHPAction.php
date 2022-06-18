@@ -6,7 +6,7 @@ use App\Application\Actions\Action;
 use mysqli;
 use Psr\Http\Message\ResponseInterface;
 
-class PHPAction extends Action
+class SQLInjectionPHPAction extends Action
 {
     protected function action(): ResponseInterface
     {

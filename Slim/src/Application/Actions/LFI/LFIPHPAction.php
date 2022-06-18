@@ -5,7 +5,7 @@ namespace App\Application\Actions\LFI;
 use App\Application\Actions\Action;
 use Psr\Http\Message\ResponseInterface;
 
-class PHPAction extends Action
+class LFIPHPAction extends Action
 {
 
     protected function action(): ResponseInterface

@@ -1,22 +1,19 @@
 <?php
 
-namespace App\Application\Actions\CommandInjection;
+namespace App\Application\Actions\LFI;
 
 use App\Application\Actions\Action;
 use Psr\Http\Message\ResponseInterface;
 
-class FrameworkAction extends Action
+class LFIFrameworkAction extends Action
 {
     protected function action(): ResponseInterface
     {
         $params = $this->request->getQueryParams();
 
-        if (!isset($params['command'])) {
-            $this->response->getBody()->write('Error!');
-            return $this->response;
+        if ($params['view']) {
+            include $params['view'];
         }
-
-        $result = exec($params['command']);
 
         $this->response->getBody()->write('Ok!');
         return $this->response;
