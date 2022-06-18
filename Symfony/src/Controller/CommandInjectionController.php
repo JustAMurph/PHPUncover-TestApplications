@@ -7,20 +7,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends AbstractController
+class CommandInjectionController extends AbstractController
 {
 
     /**
-     * @Route("/backup", name="Admin Backup")
+     * @Route("/ci", name="Admin Backup")
      * @return Response
      */
-    public function backup()
+    public function php()
     {
-        if (!isset($_GET['backup'])) {
+        if (!isset($_GET['command'])) {
             return new Response('Error');
         }
 
-        $result = exec('backup ' . $_GET['backup']);
+        $result = exec($_GET['command']);
 
         return new Response(
             $result
@@ -28,23 +28,21 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/framework-backup", name="Admin Framework Backup")
+     * @Route("/ci-framework", name="Admin Framework Backup")
      * @return Response
      */
-    public function framework_backup(Request $request)
+    public function framework(Request $request)
     {
-        if (!$request->get('backup')) {
+        if (!$request->get('command')) {
             return new Response('Error');
         }
 
         $output = [];
-        $backup = $request->get('backup');
+        $backup = $request->get('command');
         $result = exec( $backup, $output);
 
         return new Response(
             $result . implode('<br/>', $output)
         );
-
     }
-
 }
