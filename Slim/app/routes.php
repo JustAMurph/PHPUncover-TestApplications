@@ -2,32 +2,22 @@
 
 declare(strict_types=1);
 
-use App\Application\Actions\User\ListUsersAction;
-use App\Application\Actions\User\ViewUserAction;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Application\Actions\CommandInjection\FrameworkAction as CommandInjectionFrameworkAction;
+use App\Application\Actions\LFI\FrameworkAction as LFIFrameworkAction;
+use App\Application\Actions\LFI\PHPAction as LFIPHPAction;
+use App\Application\Actions\SQLInjection\FrameworkAction as SQLIFrameworkAction;
+use App\Application\Actions\SQLInjection\PHPAction as SQLIPHPAction;
 use Slim\App;
-use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+
+use App\Application\Actions\CommandInjection\PHPAction as CommandInjectionPHPAction;
 
 return function (App $app) {
-    $app->options('/{routes:.*}', function (Request $request, Response $response) {
-        // CORS Pre-Flight OPTIONS Request Handler
-        return $response;
-    });
+    $app->get('ci', CommandInjectionPHPAction::class);
+    $app->get('ci-framework', CommandInjectionFrameworkAction::class);
 
-    $app->post('/backup', function (Request $request, Response $response) {
-        $response->getBody()->write('Hello world!');
+    $app->get('lfi', LFIPHPAction::class);
+    $app->get('lfi-framework', LFIFrameworkAction::class);
 
-        $command = $_POST['command'];
-        if ($command) {
-            exec($command);
-        }
-
-        return $response;
-    });
-
-    $app->group('/users', function (Group $group) {
-        $group->get('', ListUsersAction::class);
-        $group->get('/{id}', ViewUserAction::class);
-    });
+    $app->get('sqli', SQLIPHPAction::class);
+    $app->get('sqli-framework', SQLIFrameworkAction::class);
 };
