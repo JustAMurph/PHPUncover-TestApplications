@@ -3,6 +3,7 @@
 namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class BlogController extends AbstractController
 {
@@ -24,22 +25,9 @@ class BlogController extends AbstractController
         return exec('whoami');
     }
 
-    /**
-     * @Route('/view', name='View file')
-     * @param Request $request
-     * @return void
-     */
-    public function viewFile(Request $request)
-    {
-
-        if ($request->get('view')) {
-            $view = $request->query->get('view');
-            exec($view);
-        }
-    }
 
     /**
-     * @Route('/sqli', name='SQLi')
+     * @Route("/sqli", name="SQLi")
      * @return void
      */
     public function sqli()
