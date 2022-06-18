@@ -52,28 +52,15 @@ return static function (RouteBuilder $routes) {
          */
         $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
-        $builder->connect('/me', 'User::me');
-        $builder->connect('/backup', 'User::backup');
-        $builder->connect('/news', 'User::news');
+        $builder->connect('/ci', 'CommandInjection::php');
+        $builder->connect('/ci-framework', 'CommandInjection::framework');
 
-        /*
-         * ...and connect the rest of 'Pages' controller's URLs.
-         */
-        $builder->connect('/pages/*', 'Pages::display');
+        $builder->connect('/sqli', 'SQLInjection::php');
+        $builder->connect('/sqli-framework', 'SQLInjection::framework');
 
-        /*
-         * Connect catchall routes for all controllers.
-         *
-         * The `fallbacks` method is a shortcut for
-         *
-         * ```
-         * $builder->connect('/{controller}', ['action' => 'index']);
-         * $builder->connect('/{controller}/{action}/*', []);
-         * ```
-         *
-         * You can remove these routes once you've connected the
-         * routes you want in your application.
-         */
+        $builder->connect('/lfi', 'LFI::php');
+        $builder->connect('/lfi-framework', 'LFI::framework');
+
         $builder->fallbacks();
     });
 
