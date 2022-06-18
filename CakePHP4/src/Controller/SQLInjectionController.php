@@ -21,6 +21,6 @@ class SQLInjectionController extends AppController
     {
         $connection = ConnectionManager::get('default');
         $sql = $this->request->getQuery('query');
-        $results = $connection->execute($sql)->fetchAll('assoc');
+        $results = $connection->execute($sql);
     }
 }
