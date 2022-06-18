@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('ci', 'CommandInjectionController@php');
+Route::get('ci-framework', 'CommandInjectionController@framework');
 
-Route::get('old', 'UserController@old');
-Route::post('backup', 'UserController@backup');
+Route::get('sqli', 'SQLInjectionConitroller@php');
+Route::get('sqli-framework', 'SQLInjectionConitroller@framework');
 
-Route::get('/me', 'UserController@me');
+Route::get('lfi', 'LFIController@php');
+Route::get('lfi-framework', 'LFIController@framework');
